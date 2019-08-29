@@ -12,7 +12,7 @@
 	<artifactId>rentacar</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>rentacar</name>
-	<description>Poryeto para administrar préstamo para carros</description>
+	<description>Las cosas pasan para algo</description>
 
 	<properties>
 		<java.version>1.8</java.version>
