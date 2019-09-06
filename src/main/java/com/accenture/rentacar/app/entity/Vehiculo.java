@@ -15,14 +15,30 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="vehiculos")
 
-
-public class Vehiculo {
-      
+public class Vehiculo{
+	/**
+	 * 
+	 */
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue
 	(strategy = GenerationType.IDENTITY) //Estrategia de generación de ese ID
 	private Long id;
 	
+	/*public Vehiculo( String marca ) {
+		//super();
+		// TODO Auto-generated constructor stub
+		this.marca = marca;
+	}*/
+	
+	/*public Vehiculo( Short modeloAuto ) {
+		//super();
+		// TODO Auto-generated constructor stub
+		this.modeloAuto = modeloAuto;
+	}*/
+
 	@Column(name="modelo_auto") 
 	private short modeloAuto;
 	private String marca;

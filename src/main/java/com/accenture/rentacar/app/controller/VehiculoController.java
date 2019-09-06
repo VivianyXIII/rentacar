@@ -31,7 +31,7 @@ import com.accenture.rentacar.app.service.IVehiculoService;
 	}
 	
 	@PostMapping("/vehiculos") 
-	public Vehiculo save( @RequestBody Vehiculo vehiculo ) {
+	public Vehiculo save( @RequestBody Vehiculo [] vehiculo ) {
 		return vehiculoService.save(vehiculo);	
 	}
 	
