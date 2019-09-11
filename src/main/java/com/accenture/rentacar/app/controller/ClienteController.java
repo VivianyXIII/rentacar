@@ -17,46 +17,49 @@ import com.accenture.rentacar.app.service.IClienteService;
 	@RequestMapping("/api")
 	public class ClienteController {
 		
-	@Autowired
-	private IClienteService clienteService;
-	
-	@GetMapping("/cliente")
-	public List<Cliente> listar(){
-		return clienteService.listarTodos();
-	}
-	
-	@GetMapping("/cliente/{Id}")
-	public Cliente buscarPorId( @PathVariable Long id ) {
-		return clienteService.buscarClientePorId(id);
-	}
-	
-	@PostMapping("/cliente")@GetMapping("/cliente/{Id}")
-	public Cliente buscarPorId( @PathVariable Long id ) {
-		return clienteService.buscarClientePorId(id);
-	}
-	
-	@PostMapping("/clientes") 
-	public Cliente save( @RequestBody Cliente cliente ) {
-		return clienteService.save(cliente);	
-	}
-	
+		@Autowired
+		private IClienteService clienteService;
+		
+		@GetMapping("/cliente")
+		public List<Cliente> listar(){
+			return clienteService.listarTodos(); 
+		}
+		
+		@GetMapping("/cliente/{id}")
+		public Cliente buscarPorId(@PathVariable Long id ) {
+			return clienteService.buscarClientePorId(id);
+		}
+		
+		@PostMapping("/cliente")
+		public Cliente guardar (@RequestBody Cliente cliente) {//lo recibo en el body del request
+			return clienteService.save(cliente);
+		}
+		
+		@PostMapping("/clientes")
+		public List<Cliente> guardar (@RequestBody Cliente[] clientes) {//lo recibo en el body del request
+			return  clienteService.save(clientes);
+		}
+		
 	@SuppressWarnings("unused")
 	@PostMapping("/actualizar")
 	public Cliente actualizar( @RequestBody Cliente cliente) {
 		
-		Cliente cliAActualizar = new Cliente();
-		Cliente cliActual = clienteService.buscarClientePorId(  cliente.getId() );
-		cliAActualizar.setId( cliente.getId( ));
-		cliAActualizar.setCedula( cliente.getCedula() );
-		cliAActualizar.setNombre( cliente.getNombre() );
-		cliAActualizar.setApellido( cliente.getApellido() );
-		cliAActualizar.setTelefono( cliente.getTelefono() );
-		cliAActualizar.setDireccion( cliente.getDireccion() );
-		cliAActualizar.setEmail( cliente.getEmail() );
-		cliAActualizar.setFechaCreacionRegistro( cliente.getFechaCreacionRegistro() );
+		Cliente clienteAActualizar= new Cliente();
+		Cliente clienteActual= clienteService.buscarClientePorId(cliente.getId());
+		clienteAActualizar.setId(cliente.getId());
+		clienteAActualizar.setCedula(cliente.getCedula());
+		clienteAActualizar.setNombre(cliente.getNombre());
+		clienteAActualizar.setApellido(cliente.getApellido());
+		clienteAActualizar.setTelefono(cliente.getTelefono());
+		clienteAActualizar.setDireccion(cliente.getDireccion());
+		clienteAActualizar.setEmail(cliente.getEmail());
 		
-		return clienteService.save (cliAActualizar );
-		
-		
-	} 
+		return clienteService.save(clienteAActualizar) ;
+	}
+	
+	@DeleteMapping("/clientes/{id}")
+	public String borrar(@PathVariable Long id) {
+		clienteService.delete(id);
+		return "El cliente se elimino correctamente";
+	}
 }
